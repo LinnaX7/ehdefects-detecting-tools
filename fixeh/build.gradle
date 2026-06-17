@@ -1,0 +1,93 @@
+group 'cn.nju.edu.seg'
+version '1.0-beta'
+
+apply plugin: 'java'
+
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.1"
+    }
+}
+
+apply plugin: "com.github.johnrengelman.shadow"
+
+sourceCompatibility = 1.8
+
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'fixeh.Main'
+    }
+}
+
+repositories {
+    maven { url 'https://repo.gradle.org/gradle/libs-releases' }
+    mavenCentral()
+    maven { url 'https://soot-build.cs.uni-paderborn.de/nexus/repository/soot-snapshot/' }
+    maven { url 'https://soot-build.cs.uni-paderborn.de/nexus/repository/soot-release/' }
+}
+
+dependencies {
+    // Use local jar, because UsageStyleFormatter is not bundled in 1.72
+    // compile group: 'com.beust', name: 'jcommander', version: '1.72'
+    
+    compile files('libs/jcommander-1.72.jar')
+
+    // Soot for instrument
+    compile(group: 'ca.mcgill.sable', name: 'soot', version: '3.3.0')
+
+    // Common libs such as Jackson, common lang, io, cli
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.3'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'org.apache.commons', name: 'commons-text', version: '1.2'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile group: 'cn.com.binging', name: 'excel', version: '2.1'
+    compile group: 'com.google.guava', name: 'guava', version: '23.6-jre'
+
+    // JGIT
+    compile group: 'org.eclipse.jgit', name: 'org.eclipse.jgit', version: '4.10.0.201712302008-r'
+
+    // Apache POI for table operations
+    compile group: 'org.apache.poi', name: 'poi', version: '3.15'
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.15'
+
+    // CSV
+    compile group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
+
+    // Spoon and Gumtree
+    compile group: 'fr.inria.gforge.spoon', name: 'spoon-core', version: '6.1.0'
+    compile group: 'com.github.gumtreediff', name: 'core', version: '2.0.0'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+    compile group: 'org.apache.poi', name: 'poi', version: '3.15'
+    // Gradle tooling apis
+    compile group: 'org.gradle', name: 'gradle-tooling-api', version: '4.4.1'
+
+    // Android APK parser
+    compile group: 'net.dongliu', name: 'apk-parser', version: '2.5.0'
+
+    // Android library providing apis to talk to android devices
+    compile group: 'com.android.tools.ddms', name: 'ddmlib', version: '25.3.0'
+
+    compile project(":fixeh-woventools")
+    
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+}
+
+
+configurations.all {
+    exclude group: 'org.slf4j', module: 'slf4j-simple'
+}

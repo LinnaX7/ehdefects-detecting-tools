@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fixeh>
+    <!-- address should be replaced before pushing to remote device -->
+    <remote-controller enable="false" address="127.0.0.1" port="7675"/>
+    <!-- if exclude is false, then all package/class/method will be supposed to be included -->
+    <policy exclude="false" search="false" limit="5">
+        <!-- policy file may contain any entries this file contains, and value may be remote(http/https) -->
+        <!-- ONLY THE FIRST FILE POLICY WILL BE USED! -->
+
+        <!--<policyentry kind="file" value="file:///data/local/tmp/fixeh-policy.xml"/>-->
+
+        <!-- if policy file is specified and is valid, any other entries will be ignored -->
+
+        <!-- ALL EXCLUDED -->
+
+        <!-- you can specify as many package/class/method entries as you can (even if duplicated), -->
+        <!-- class name must be full qualified, method name must be set like the example below -->
+    </policy>
+</fixeh>
