@@ -1,7 +1,7 @@
 # AppEHDefectsDetectingTools
 
 #### 介绍
-丁顺杰、陆璐开发的相关工具
+Automatically Detecting Exception Handling Defects in Android Applications 的工具
 
 #### 软件架构
 软件架构说明

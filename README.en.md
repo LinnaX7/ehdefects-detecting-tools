@@ -1,7 +1,7 @@
 # AppEHDefectsDetectingTools
 
 #### Description
-丁顺杰、陆璐开发的相关工具
+Tool for Automatically Detecting Exception Handling Defects in Android Applications
 
 #### Software Architecture
 Software architecture description
